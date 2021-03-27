@@ -18,6 +18,7 @@ import styles from './post.module.scss';
 
 interface Post {
   first_publication_date: string | null;
+  last_publication_date: string | null;
   data: {
     title: string;
     banner: {
@@ -39,6 +40,7 @@ interface PostProps {
 
 export default function Post({ post }: PostProps): ReactElement {
   const router = useRouter();
+
   const postTotalWords = post.data.content.reduce((total, contentItem) => {
     total += contentItem.heading.split(' ').length;
 
@@ -61,6 +63,7 @@ export default function Post({ post }: PostProps): ReactElement {
   if (router.isFallback) {
     return <h1>Carregando...</h1>;
   }
+
   return (
     <>
       <main className={commonStyles.container}>
@@ -87,6 +90,24 @@ export default function Post({ post }: PostProps): ReactElement {
                 {readTime} min
               </li>
             </ul>
+            {post.last_publication_date &&
+              post.last_publication_date !== post.first_publication_date && (
+                <p>
+                  {`* editado em ${format(
+                    new Date(post.last_publication_date),
+                    'dd MMM yyyy',
+                    {
+                      locale: ptBR,
+                    }
+                  )} às ${format(
+                    new Date(post.last_publication_date),
+                    'HH:MM',
+                    {
+                      locale: ptBR,
+                    }
+                  )} `}
+                </p>
+              )}
           </div>
 
           {post.data.content.map(content => (
@@ -101,6 +122,22 @@ export default function Post({ post }: PostProps): ReactElement {
             </article>
           ))}
         </div>
+        <section
+          ref={elem => {
+            if (!elem) {
+              return;
+            }
+            const scriptElem = document.createElement('script');
+            scriptElem.src = 'https://utteranc.es/client.js';
+            scriptElem.async = true;
+            scriptElem.crossOrigin = 'anonymous';
+            scriptElem.setAttribute('repo', 'gaprados/ignite-desafio3');
+            scriptElem.setAttribute('issue-term', 'pathname');
+            scriptElem.setAttribute('label', 'blog-comment');
+            scriptElem.setAttribute('theme', 'dark-blue');
+            elem.appendChild(scriptElem);
+          }}
+        />
       </main>
     </>
   );
@@ -134,6 +171,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const post = {
     uid: response.uid,
     first_publication_date: response.first_publication_date,
+    last_publication_date: response.last_publication_date,
     data: {
       title: response.data.title,
       subtitle: response.data.subtitle,
