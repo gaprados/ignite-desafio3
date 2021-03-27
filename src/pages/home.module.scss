@@ -1,1 +1,60 @@
-// TODO
+.posts {
+  margin: 5rem auto 0;
+
+  a {
+    display: block;
+    padding: 2rem 0;
+
+    & + a {
+      margin-top: 1.75rem;
+      padding-top: 1rem;
+    }
+
+    strong {
+      display: block;
+      font-size: 1.5rem;
+      margin-top: 1rem;
+      line-height: 2rem;
+      transition: color 0.2s;
+    }
+
+    p {
+      color: var(--gray-400);
+      margin-top: 0.5rem;
+      line-height: 1.625rem;
+    }
+    .postInfo {
+      display: inline-block;
+      margin-top: 1.5rem;
+
+      time,
+      span {
+        color: var(--gray-400);
+        margin-right: 0.25rem;
+        svg {
+          margin-right: 0.25rem;
+        }
+      }
+
+      time {
+        margin-right: 1.75rem;
+      }
+    }
+
+    &:hover strong {
+      color: var(--pink-500);
+    }
+  }
+
+  button {
+    border: none;
+    background: transparent;
+    color: var(--pink-500);
+    transition: filter 0.2s;
+    margin-top: 5rem;
+
+    &:hover {
+      filter: brightness(0.8);
+    }
+  }
+}

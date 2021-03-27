@@ -1,1 +1,48 @@
-// TODO
+.postBanner {
+  width: 100%;
+  height: 25rem;
+  object-fit: cover;
+}
+
+.postContainer {
+  .postHead {
+    margin: 2rem 0;
+    padding-top: 2rem;
+    h1 {
+      font-weight: 700;
+      font-size: 3rem;
+      line-height: 3.625rem;
+    }
+    ul {
+      list-style: none;
+      display: flex;
+      padding: 1.25rem 0.5rem;
+    }
+
+    li {
+      color: var(--gray-100);
+      & + li {
+        margin: 0 1.75rem;
+      }
+      svg {
+        margin-right: 0.75rem;
+      }
+    }
+  }
+
+  .postContent {
+    margin-bottom: 2rem;
+    padding: 0 2.25rem;
+
+    .contentHeading {
+      font-weight: 600;
+      font-size: 2rem;
+      line-height: 2.25rem;
+    }
+
+    .contentBody {
+      padding: 0 2.25rem;
+      margin-top: 1.25rem;
+    }
+  }
+}
